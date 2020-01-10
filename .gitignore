@@ -1,0 +1,13 @@
+# log folders
+crawl-logs/
+error-logs/
+
+# vscode config
+.vscode/
+
+# python runtime
+__pycache__/
+*.pyo
+*.pyc
+
+globals.py
