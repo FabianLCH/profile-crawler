@@ -42,7 +42,7 @@ for profile in profileList:
         crawlErrorToast.show_toast("Crawl Error", "Could not successfully crawl the profiles page.", duration=5)
 
 # check if there are any bugged profiles 
-if len(affectedProfiles) is not 0:
+if len(affectedProfiles) != 0:
     toaster = ToastNotifier()
     toaster.show_toast("Profile Crawler", "The crawler found affected profiles!", duration=5)
 
@@ -58,7 +58,7 @@ if len(affectedProfiles) is not 0:
 
             # add spaces to given name and middle initial conditionally
             given += " "
-            middle = middle + " " if len(middle) is not 0 else middle
+            middle = middle + " " if len(middle) != 0 else middle
 
             full_name = given + middle + last
             affected_profiles_text.write(full_name + "\n")
