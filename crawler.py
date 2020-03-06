@@ -8,7 +8,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from globals import URL, AFFECTED_IMG_SRC_BASE, USERNAME, PASSWORD, EMAILS
+from globals import URL, AFFECTED_IMG_SRC_BASE, CRAWLER_EMAIL, PASSWORD, ADMIN_EMAILS
 
 """
 Crawl Forestry website
@@ -69,15 +69,15 @@ if len(affectedProfiles) != 0:
         """
         s = smtplib.SMTP(host='smtp-mail.outlook.com', port=587)
         s.starttls()
-        s.login(USERNAME, PASSWORD)
+        s.login(CRAWLER_EMAIL, PASSWORD)
 
-        for email in EMAILS:
+        for email in ADMIN_EMAILS:
             msg = MIMEMultipart()
 
             with open(output_file) as aff_prof_txt:
                 message = aff_prof_txt.read()
             
-            msg['From'] = USERNAME
+            msg['From'] = CRAWLER_EMAIL
             msg['To'] = email
             msg['Subject'] = "Forestry Profiles Crawl Alert"
 

@@ -1,7 +1,32 @@
 # profile-crawler
 A crawler script that searches for a display bug on the Forestry Profiles website. 
 
-When the crawler detects a bug, it creates a log file that is stored locally and displays a windows toast message to the user. Then, it attempts to send an email containing the contents of the log file to all recipients in the `EMAILS` list. 
+When the crawler detects a bug, it creates a log file that is stored locally and displays a windows toast message to the user. Then, it attempts to send an email containing the contents of the log file to all recipients in the `EMAILS` list.
+
+## Setup
+```sh
+    git clone https://github.com/FabianLCH/profile-crawler
+    pip install -r requirements.txt
+```
+
+### Add `globals.py`
+Create a `globals.py` file with the following variables:
+
+```sh
+URL=
+AFFECTED_IMG_SRC_BASE=
+CRAWLER_EMAIL=
+PASSWORD=
+ADMIN_EMAILS=
+```
+
+|Variable|Type|Description|
+|---|---|---|
+|URL|String|The URL of the page that will be crawled|
+|AFFECTED_IMG_SRC_BASE|String|The name of the image file that replaces the faculty member's image file when the bug occurs|
+|CRAWLER_EMAIL|String|The email address that will be used to send crawl notifications|
+|PASSWORD|String|The password for `CRAWLER_EMAIL`|
+|ADMIN_EMAILS|List|A list containing emails that will receive crawler notifications|
 
 ## How to set up automatic execution with Windows Task Scheduler
 In order to have the script run locally at automatic intervals, we will use the Windows Task Scheduler. To set up the Task Scheduler, follow the steps below:
