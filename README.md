@@ -6,7 +6,9 @@ When the crawler detects a bug, it creates a log file that is stored locally and
 ## Setup
 ```sh
     git clone https://github.com/FabianLCH/profile-crawler
+    cd profile-crawler
     pip install -r requirements.txt
+    python crawler.py
 ```
 
 ### Add `globals.py`
