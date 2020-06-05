@@ -2,6 +2,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from win10toast import ToastNotifier
+import traceback
 
 import datetime
 import re
@@ -30,16 +31,23 @@ profileList = content.find_all(id=re.compile("^post"))
 
 for profile in profileList:
     try:
-        if AFFECTED_IMG_SRC_BASE in profile.find("img")['src']:
+        profile_image = profile.find("img")
+        if profile_image is not None and AFFECTED_IMG_SRC_BASE in profile_image['src']:
             
             # ignore the original profile
-            if profile.find(id="last") and profile.find(id="last").string == "Innes":
+            last_name = profile.find(id="last")
+            if last_name is not None and last_name.string == "Innes":
                 continue
 
             affectedProfiles.append(profile)
     except Exception as e:
+        error_traceback = traceback.format_exc()
+
         crawlErrorToast = ToastNotifier()
         crawlErrorToast.show_toast("Crawl Error", "Could not successfully crawl the profiles page.", duration=5)
+        
+        with open(error_file, "w") as errors:
+            errors.write(error_traceback)
 
 # check if there are any bugged profiles 
 if len(affectedProfiles) != 0:
@@ -92,3 +100,6 @@ if len(affectedProfiles) != 0:
         
         with open(error_file, "w") as errors:
             errors.write(repr(e))
+else:
+    for i in range(10):
+        print("No affected profiles.")
